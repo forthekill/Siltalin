@@ -1,0 +1,567 @@
+<?php
+  session_start();
+  if(!isset($_SESSION['email'])){
+    header("Location: index.html");
+  }
+  if(isset($_POST['logout'])){
+    //echo "<script type='text/javascript'>alert('Dude!');</script>";
+    unset($_SESSION['email']);
+    header("Location: index.html");
+  }
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Siltalin</title>
+
+    <!-- Bootstrap -->
+    <link href="assets/css/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="assets/css/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="build/css/custom.min.css" rel="stylesheet">
+
+    <!-- Needed? -->
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- /Needed? -->
+
+    <style>
+      .body {
+        background: #F7F7F7;
+      }
+      #birst {
+        width: 100%;
+        height: 100%;
+        /*overflow: hidden !important;*/
+      }
+      .bcontainer {
+        /*position: absolute;
+        top: 50%;
+        left: 50%;
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);*/
+      }
+
+    </style>
+
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col" id="leftcol">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="spaces.php" class="site_title"><i class="fa fa-paw"></i> <span>Siltalin</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="images/user.png" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Welcome,</span>
+                <h2>Han</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                  <li><a onClick="openHome()"><i class="fa fa-home"></i> Home </span></a>
+                  </li>
+                  <li><a><i class="fa fa-bar-chart-o"></i> Dashboards <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><b class="pull-right" style="z-index:100; position:relative;"><a href="#" onclick="doPrompt(retail)">&nbsp;&nbsp;&nbsp;💬&nbsp;&nbsp;&nbsp;</a></b><a href="#" onclick="openDemo(retail)" style="z-index:1; position:relative;">Retail</a></li>
+                      <li><b class="pull-right" style="z-index:100; position:relative;"><a href="#" onclick="doPrompt(sales)">&nbsp;&nbsp;&nbsp;💬&nbsp;&nbsp;&nbsp;</a></b><a href="#" onclick="openDemo(sales)" style="z-index:1; position: relative;">Sales</a></li>
+                      <li><a href="#" onclick="openDemo(chain)">Supply Chain</a></li>
+                      <li><a href="#" onclick="openDemo(marketing)">Marketing</a></li>
+                      <li><a href="#" onclick="openDemo(insurance)">Insurance</a></li>
+                      <li><a href="#" onclick="openDemo(education)">Education</a></li>
+                      <li><a href="#" onclick="openDemo(finance)">Finance</a></li>
+                      <li><a href="#" onclick="openDemo(human)">Human Resources</a></li>
+                      <li><a href="#" onclick="openDemo(exasol)">Exasol (In-memory)</a></li>
+                      <li><a href="#" onclick="openDemo(usage)">Usage Tracking</a></li>
+                      <!--li><a href="#" onclick="openDemo(fleet)">Fleet</a></li-->
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-edit"></i> Reports <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="#" onclick="openReport(pipeline)">Pipeline</a></li>
+                      <li><a href="#" onclick="openReport(returns)">Returns</a></li>
+                      <li><a href="#" onclick="openReport(revenue)">Channel Revenue</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="#">Standard</a></li>
+                      <li><a href="#">Dynamic</a></li>
+                    </ul>
+                  </li>
+                  <!--li><a><i class="fa fa-clone"></i> Replication <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="#">Clone Record</a></li>
+                      <li><a href="#">Clone Project</a></li>
+                    </ul>
+                  </li-->
+                </ul>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="spaces.php">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="images/user.png" alt="">Han
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;"> Profile</a></li>
+                    <li>
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
+                        <span>Settings</span>
+                      </a>
+                    </li>
+                    <li><a href="javascript:;">Help</a></li>
+                    <li><a href="spaces.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+
+                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">3</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/user.png" alt="Profile Image" /></span>
+                        <span>
+                          <span>Ben</span>
+                          <span class="time">2 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Dad! I told you to stay out of my room! You can't just barge in! I'm almost a Jedi now and...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/user.png" alt="Profile Image" /></span>
+                        <span>
+                          <span>Lando</span>
+                          <span class="time">13 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Han old buddy! Been a while. I've got a can't miss opportunity that we need to talk about...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/user.png" alt="Profile Image" /></span>
+                        <span>
+                          <span>C-3PO</span>
+                          <span class="time">24 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Is this thing on? R2 be quiet! They won't be able to hear this! Sir, I have something you need...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <div id="pageContent">
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="assets/css/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="assets/css/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="assets/css/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- Skycons -->
+    <script src="assets/css/vendors/skycons/skycons.js"></script>
+
+    <!-- Needed?? -->
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- Flot -->
+    <script src="../vendors/Flot/jquery.flot.js"></script>
+    <script src="../vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- /Needed?? -->
+
+    <!-- Custom Theme Scripts -->
+    <script src="build/js/custom.min.js"></script>
+
+    <!-- Birst Code -->
+    <!-- Demo definitions -->
+    <script src="assets/js/spaces.js" type="text/javascript"></script>
+    <!-- Birst Javascript API -->
+    <script src="https://sde.birst.com/js/birst_embed.js" type="text/javascript"></script>
+
+    <!-- Load demos -->
+    <script>
+
+      /* VARIABLES */
+      // Keeps track of the current space being viewed
+      // TODO Make these an object or something
+      // TO
+      var currSpace = "";
+      var currReport = "";
+      var reportLoaded = true;
+
+      // ??
+      var view = "";
+
+      var filters = "";
+
+      // Keeps track of original content div height
+      var origHeight = 0;
+
+      //var serverUrl = "https://sde.birst.com";
+      var serverUrl = "https://sde.birst.com";
+
+
+      /* FUNCTION */
+      // Remove active status from menu items after clicking on another item
+      $(".nav.child_menu > li").click(function(){
+        $(".nav.child_menu > li").removeClass("active");
+        $(this).addClass("active");
+      });
+
+      function doPrompt(demo){
+        // TODO
+        // grab prompt info
+        // open prompt
+        // grab selected values
+        // call demo with prompt values
+      }
+
+      /* FUNCTION openDemo */
+      // Checks to see if a demo is already loaded, if not loads the demo page
+      // Then it loads the specified demo into the demo div
+      function openDemo(demo) {
+        console.info("in openDemo");
+        console.info("reportLoaded: " + reportLoaded);
+        console.info("currReport: " + currReport);
+        console.info("currSpace: " + currSpace);
+
+        // Check to see if it is the current space. If so don't reload.
+        if (reportLoaded == true){
+          // Get Birst content
+          getContent("siltalinBirst.html");
+        }
+
+        if (currSpace != demo.spaceId){
+          // Load new demo
+          ssoDemo(demo);
+
+          // Set reportLoaded to show a demo is loaded not a report
+          reportLoaded = false;
+          // Set the current space ID to avoid reloading the same demo
+          currSpace = demo.spaceId;
+          // Blank out the current report since a demo is loaded not a report
+          currReport = "";
+        }
+
+      }
+
+      /* FUNCTION openReport */
+      // Checks to see if Home is already loaded, if not loads the home page
+      // Then it loads the specified report into the report div
+      function openReport(report){
+        console.info("in openReport");
+        console.info("reportLoaded: " + reportLoaded);
+        console.info("currReport: " + currReport);
+        console.info("currSpace: " + currSpace);
+
+        // TODO
+        // check for siltalinBase/reportLoaded
+        // if true, then just load the report to the div as normal
+        // if false, load base using the specified report
+
+        if (reportLoaded == false){
+          // Get Birst content
+          getContent("siltalinBase.html");
+        }
+
+        if (currReport != report.reportName){
+          ssoDemo(report);
+
+          // Set reportLoaded to show a report is loaded not a demo
+          reportLoaded = true;
+          // Set the current report to avoid reloading the same report
+          currReport = report.reportName;
+          // Blank out the current spaceId since a report is loaded not a demo
+          currSpace = "";
+        }
+
+      }
+
+      /* FUNCTION openHome */
+      // Checks to see if Home is already loaded, if not loads the home page
+      function openHome(){
+        if (reportLoaded == false){
+          getContent("siltalinBase.html");
+          ssoDemo(pipeline);
+          reportLoaded = true;
+          currReport = pipeline.reportName;
+          currSpace = "";
+        }
+      }
+
+      /* FUNCTION ssoPost */
+      // Posts the SSO info, gets the token, then requests the embedded content
+      function ssoPost(ssoUrl, params, element, demo) {
+
+        console.log("in ssoPost");
+
+        $.post(ssoUrl, {}, function(data){
+          var iframeUrl = serverUrl + "/SSO.aspx?BirstSSOToken=" + data + params;
+
+          // If viewing the widgets with the embedded chart
+          if (view == "siltalinBase.html"){
+            hgt = $("#todolist .x_content").outerHeight() + 5; // For some reason 5px are missing
+            wdt = $("#todolist .x_content").outerWidth();
+
+            // DEBUG
+            console.info("todolist x_content hgt: " + hgt);
+            console.info("todolist x_content wdt: " + wdt);
+
+            // Set height/width for the chart content
+            $("#birstPanel .bcontainer").outerHeight(hgt);
+            $("#birstPanel .bcontainer").outerWidth(wdt);
+
+            // Set margin/padding for the chart content
+            $("#birstPanel .bcontainer").css("padding","0px");
+            $("#birstPanel .bcontainer").css("margin","0px");
+
+            $("#birstPanel div h2").html(demo.titleText);
+            str = $("#birstPanel div h2").html();
+            //console.log("af str: " + str);
+
+          // Else loading a demo
+          }else{
+            // Set height/width for the demo content
+            var hgt = $(window.top).height() - 68; // Subtract menu bar size (57), border (1), and margin (10)
+            //var hgt = $('#leftcol').outerHeight() - 68; // Subtract menu bar size (57), border (1), and margin (10)
+            var wdt = $('#pageContent').outerWidth();
+
+            // DEBUG
+            console.info("demo hgt: " + hgt);
+            console.info("demo wdt: " + wdt);
+
+            /* TODO test which one of these is actually needed */
+            $("#conttrow").outerHeight(hgt);
+            $("#birst").outerHeight(hgt);
+          }
+
+          var opts = {autoSize: true, iframeSrc: iframeUrl};
+
+          // Call Birst to get the embedded content and place in the specified element
+          BirstConfig.create(element, opts);
+
+        });
+      }
+
+      /* FUNCTION ssoDemo */
+      // Creates the SSO URL and set the embedded content request parameters
+      function ssoDemo(demo){
+        console.info("in ssoDemo");
+
+        // Construct the SSO URL
+        var ssoUrl = serverUrl + "/TokenGenerator.aspx?birst.username=" + demo.user + "&birst.ssoPassword=" + demo.pass
+          + "&birst.spaceId=" + demo.spaceId;
+
+        // Construct the embedded content parameters
+        if (demo.module == "visualizer"){
+          console.info("Viz");
+          /* TODO When embedding a chart is fixed, clean this up */
+          var params =  "&birst.module=" + demo.module + "&embeddedView=" + demo.embeddedView + "&birst.reportName="
+            + demo.reportName;
+        }else{
+          console.info("Dash");
+          var params =  "&birst.module=" + demo.module + "&birst.embedded=" + demo.embed + "&birst.hideDashboardNavigation="
+            + demo.nav + "&birst.hideDashboardPrompts=" + demo.prompts + "&birst.dashboard=" + demo.dash
+            + "&birst.page=" + demo.page + "&birst.hideHeader=" + demo.hideHeader + "&birst.hideSubHeader="
+            +  demo.hideSubHeader + "&birst.filters=" + filters;
+        }
+
+        // Get the embedded content
+        ssoPost(ssoUrl, params, "birst", demo);
+        console.info("done ssoDemo");
+      }
+
+      /* FUNCTION getContent */
+      // Populate the content div with data from specified file
+      function getContent(content){
+
+        view = content;
+
+        var xhr= new XMLHttpRequest();
+        xhr.open("GET", content, true);
+
+        xhr.onreadystatechange= function() {
+            if (this.readyState!==4) return;
+            if (this.status!==200) return; // or whatever error handling you want
+
+            // Empty the content div
+            $("#pageContent").empty();
+
+            // Add data to the content div
+            document.getElementById("pageContent").innerHTML= this.responseText;
+
+            // DEBUG TODO Not needed??
+            var cHgt = $("#taskbox").outerHeight();
+            var cWdt = $("#taskbox").outerWidth();
+            console.info("cWdt: " + cWdt);
+            console.info("cHgt: " + cHgt);
+
+            if (origHeight == 0 ){
+              origHeight = $('#pageContent').outerHeight();
+              console.info("#pageContent height: " + origHeight);
+            }
+
+        };
+
+        xhr.send();
+
+        // If home content is loaded, set current spaceId to blank
+        if (content == "siltalinBase.html"){
+          currSpace = "";
+        }
+
+      }
+
+      // Load the base Siltalin app content
+      getContent("siltalinBase.html");
+      ssoDemo(pipeline);
+      reportLoaded = true;
+      currReport = pipeline.reportName;
+      currSpace = "";
+
+      // Wait time for redraw
+      var wait;
+
+      // FUNCTION resizeChartDiv
+      // Resizes the chart div when the window resizes
+      function resizeChartDiv (height,width){
+        // Set height/width for the chart content
+        $("#birstPanel .bcontainer").outerHeight(height);
+        $("#birstPanel .bcontainer").outerWidth(width);
+      }
+
+      // FUNCTION ON RESIZE
+      // Checks for window resize and calls the draw code
+      $(window).resize(function(){
+
+        // Get current dimensions of the window
+        winWidth = $("#todolist .x_content").width();
+        winHeight = $("#todolist .x_content").height();
+
+        // Debugging
+        console.info("#todolist .x_content width: " + winWidth);
+        console.info("#todolist .x_content height: " + winHeight);
+
+        clearTimeout(wait);
+
+        wait = setTimeout(resizeChartDiv(winHeight,winWidth), 500);
+
+      });
+
+    </script>
+  </body>
+</html>

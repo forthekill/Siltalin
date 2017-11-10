@@ -1,0 +1,46 @@
+#login_form
+{
+ background-color:white;
+ width:350px;
+ padding:20px;
+ box-sizing:border-box;
+ margin-left:320px;
+ box-shadow:0px 0px 10px 0px #2E64FE;
+}
+#login_form h1
+{
+ text-align:center;
+ margin:0px;
+ color:#0B2161;
+ font-size:27px;
+ margin-bottom:20px;
+}
+#login_form #login_label
+{
+ color:#0B2161;
+}
+#login_form input[type="email"],input[type="password"]
+{
+ width:250px;
+ /*height:40px;*/
+ padding-left:5px;
+ /*margin:5px;*/
+ border-radius:2px;
+ border:1px solid #2E64FE;
+}
+#login_form input[type="submit"]
+{
+ background-color:#2E64FE;
+ color:white;
+ border:none;
+ border-bottom:3px solid #0040FF;
+ width:250px;
+ height:45px;
+ border-radius:2px;
+ margin-left:-4px;
+ margin-top:5px;
+}
+#login-form #loading_spinner
+{
+ display:none;
+}
