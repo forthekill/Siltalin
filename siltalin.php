@@ -22,12 +22,11 @@
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <!--link href="assets/css/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"-->
 
     <!-- Font Awesome -->
     <link href="assets/css/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
-    <link href="build/css/custom.min.css" rel="stylesheet">
+    <link href="assets/css/custom.min.css" rel="stylesheet">
 
     <!-- Popup dialogs -->
     <link href="assets/css/popup.css" rel="stylesheet">
@@ -328,13 +327,7 @@
     <!-- jQuery -->
     <script src="assets/css/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script-->
-    <script src="assets/css/vendors/bootstrap/dist/js/bootstrap.min.js"></script-->
-
-    <!-- FastClick -->
-    <script src="assets/css/vendors/fastclick/lib/fastclick.js"></script>
-    <!-- Skycons -->
-    <script src="assets/css/vendors/skycons/skycons.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Needed?? -->
     <!-- NProgress -->
@@ -343,14 +336,13 @@
     <script src="../vendors/Chart.js/dist/Chart.min.js"></script-->
     <!-- iCheck -->
     <script src="../vendors/iCheck/icheck.min.js"></script>
-
-    <!-- DateJS (used for left dropdown menu. strange but it is) -->
-    <script src="../vendors/DateJS/build/date.js"></script>
-
     <!-- /Needed?? -->
 
+    <!-- DateJS (used for left dropdown menu. strange but it is) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
+
     <!-- Custom Theme Scripts -->
-    <script src="build/js/custom.min.js"></script>
+    <script src="assets/js/custom.min.js"></script>
 
     <!-- Birst Code -->
     <!-- Demo definitions -->
